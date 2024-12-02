@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+  - name: test-container
+    image: busybox
+    command: [ "sleep", "3600" ]
+    volumeMounts:
+    - mountPath: "/data"
+      name: restored-volume
+  volumes:
+  - name: restored-volume
+    persistentVolumeClaim:
+      claimName: pvc-from-snapshot
